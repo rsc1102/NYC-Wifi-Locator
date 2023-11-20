@@ -4,12 +4,17 @@ import { useEffect, useState , useMemo} from 'react';
 import { GoogleMap, useLoadScript, MarkerF ,InfoWindowF} from "@react-google-maps/api";
 import Filter from "components/filter";
 
-export default function MapWindow({range,wifiType}) {
+type MapWindowType = {
+  range:number,
+  wifiType:string
+}
+
+export default function MapWindow({range,wifiType}:MapWindowType) {
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY as string,
   });
 
-  const [userLocation,setUserLocation] = useState({});
+  const [userLocation,setUserLocation] = useState({lat:Infinity,lng:Infinity});
 
   useEffect(() => {
     getUserLocation();
@@ -24,7 +29,7 @@ export default function MapWindow({range,wifiType}) {
   }
 
 
-  if (!isLoaded || Object.keys(userLocation).length === 0){
+  if (!isLoaded || JSON.stringify(userLocation) === JSON.stringify({lat:Infinity,lng:Infinity})){
     return (
     <div className='flex flex-col items-center '>
       <button className="SearchButton loading-cursor wide" disabled>Searching...</button>
@@ -37,7 +42,27 @@ export default function MapWindow({range,wifiType}) {
   );
 }
 
-function Map({userLocation,range,wifiType}) {
+type location = {
+  lat : number,
+  lng : number
+};
+
+type MapType = {
+  userLocation:location,
+  range:number,
+  wifiType:string
+}
+
+type datapoint = {
+  "key": number,
+  "lat": number,
+  "lng": number,
+  "Type": string,
+  "Remarks": string|null,
+  "Name": string|null
+}
+
+function Map({userLocation,range,wifiType}:MapType) {
 
   const center = useMemo(() => (userLocation),[]);
   const data = Filter(center,range,wifiType);
@@ -45,14 +70,14 @@ function Map({userLocation,range,wifiType}) {
   const [activeMarker, setActiveMarker] = useState(null);
   const [map, setMap] = useState(null);
 
-  const handleOnLoad = (map) => {
+  const handleOnLoad = (map:any) => {
     setMap(map);
     const bounds = new google.maps.LatLngBounds();
-    data.every(( item ) => bounds.extend({lat:item.lat, lng:item.lng}))
+    data.every(( item: datapoint) => bounds.extend({lat:item.lat, lng:item.lng}))
     map.fitBounds(bounds);
   };
 
-  const handleActiveMarker = (marker) => {
+  const handleActiveMarker = (marker:any) => {
     if (marker === activeMarker) {
       return;
     }
@@ -91,7 +116,7 @@ function Map({userLocation,range,wifiType}) {
         icon={blueDot}
         title='You are here!'/>
 
-      {data.map((item) => (
+      {data.map((item:datapoint) => (
 
         <MarkerF key = {item.key}
         onClick={() => handleActiveMarker(item.key)}

@@ -10,19 +10,21 @@ function App() {
     const [searchRangeSelected,setSearchRangeSelected] = useState(1);
 
     const handleWifiTypeChange = () => {
-      setWifiTypeSelected(document.getElementById("wifiTypeDropdown").value);
+      const val = (document.getElementById("wifiTypeDropdown") as HTMLInputElement|null)?.value;
+      setWifiTypeSelected(val!);
     }
     
     const handleSearchRangeValue = () =>{
-      const val = parseFloat(document.getElementById("searchRange").value)/100;
-      document.getElementById("searchRangeValue").innerText = val.toFixed(2);
+      const searchRange = (document.getElementById("searchRange") as HTMLInputElement|null)?.value;
+      const val = parseFloat(searchRange!)/100;
+      document.getElementById("searchRangeValue")!.innerText = val.toFixed(2);
       setSearchRangeSelected(val);
     }
 
     const handleSearchButtonClick = () => {
-      document.getElementById("heading").classList.add("hide");
-      document.getElementById("headingWrapper").classList.add("hide");
-      document.getElementById("mapWrapper").classList.add("tall");
+      document.getElementById("heading")?.classList.add("hide");
+      document.getElementById("headingWrapper")?.classList.add("hide");
+      document.getElementById("mapWrapper")?.classList.add("tall");
       setLoadMap(true);
     }
     

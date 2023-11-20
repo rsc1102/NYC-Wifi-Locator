@@ -26553,7 +26553,6 @@ export default function GetData(){
         "Name": "bk-02-108355"
       }
     }
-    
            
-    return data      
+    return Object.values(data);      
 }

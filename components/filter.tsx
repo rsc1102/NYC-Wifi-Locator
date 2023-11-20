@@ -28,15 +28,24 @@ type location = {
     lng : number
 };
 
+type datapoint = {
+    "key": number,
+    "lat": number,
+    "lng": number,
+    "Type": string,
+    "Remarks": string|null,
+    "Name": string|null
+}
+
 export default function Filter(user_location:location,range:number,wifiType:string){
     const data = GetData();
-    let valid_data = [];
-    for (var key in data) {
-        
-        if(distance_in_miles(user_location.lat,user_location.lng,data[key].lat,data[key].lng) < range && 
-        (wifiType === "Any" || wifiType === data[key].Type)){
-            valid_data.push(data[key]);
+    let valid_data:any = [];
+
+    data.map((item:datapoint) => {
+        if(distance_in_miles(user_location.lat,user_location.lng,item.lat,item.lng) < range && 
+        (wifiType === "Any" || wifiType === item.Type)){
+            valid_data.push(item);
         }
-    }
+    })
     return valid_data;
 }
