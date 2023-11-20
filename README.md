@@ -1,1 +1,1 @@
-# NYC-Wifi-Locator
+# NYC Wifi Locator

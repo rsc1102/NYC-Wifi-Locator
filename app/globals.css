@@ -1,0 +1,222 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+
+    width: 100%;
+    height: 100vh;
+}
+
+.map-container {
+  width: 100%;
+  height: 100%;
+}
+
+.font-bold {
+  font-weight: bold;
+}
+
+.font-red {
+  color: red;
+}
+
+.font-green {
+  color: green;
+}
+
+.url {
+  color: blue;
+}
+
+.url:hover{
+  text-decoration: underline;
+}
+
+
+
+.main {
+  width: 100%;
+  height: 100%;
+}
+
+.headingWrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 2%;
+  margin-bottom: 2%;
+}
+
+.headingWrapper.hide{
+  margin-top: 0;
+  transition: margin-top 0.5s linear;
+}
+
+#heading {
+  font-size: max(4vw,40px);
+  font-weight: bold;
+}
+
+#heading.hide {
+  font-size: 0 !important;
+  transition: font-size 0.5s linear;
+}
+
+.filters{
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.filterChild {
+  display: flex;
+  justify-content: center;
+}
+
+.label {
+  font-size: large;
+  font-weight: bold;
+  margin-right: 10px;
+  margin-left: 30px;
+}
+
+#wifiTypeDropdown {
+  border-radius: 5px;
+  width: max(15vw,150px);
+  cursor: pointer;
+}
+
+#searchRange {
+  cursor:grab;
+}
+
+#searchRangeValue{
+  width: 50px;
+  background-color: white;
+  text-align: center;
+  border-radius: 5px;
+  font-size: large;
+  margin-left: 10px;
+}
+
+#searchRangeValue + span{
+  margin-left: 10px;
+  font-size: large;
+}
+
+.mapWrapper {
+  margin-top: 2%;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height:4%;
+}
+.mapWrapper.tall {
+  height:100%;
+}
+
+.mapWindow{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+
+}
+
+
+
+.SearchButton{
+  background-color: blue;
+  width: max(15%,150px);
+  max-height: 30px;
+  border-radius: 5px;
+  border: 1px solid black;
+  color: white;
+
+}
+
+.SearchButton:active{
+  background-color: #4169e1;
+}
+
+.SearchButton.wide {
+  width: 35%;
+}
+
+
+
+.loading-cursor{
+  cursor: wait;
+}
+
+
+@media screen and (max-width: 700px){
+  .label {
+    font-size: medium;
+  }
+
+  .filters{
+    flex-direction: column;
+  }
+
+  .filterChild{
+    margin-top: 20px;
+  }
+
+  .mapWindow{
+    width: 100%;
+  }
+
+  .permissionInfo{
+    font-size: small;
+  }
+
+}
+
+@media screen and (max-width: 400px){
+  .label {
+    font-size: small;
+  }
+
+  .filters{
+    flex-direction: column;
+  }
+
+  #searchRange{
+    width: 30%;
+  }
+
+  .filterChild{
+    margin-top: 20px;
+  }
+
+  .mapWindow{
+    width: 100%;
+  }
+
+  .permissionInfo{
+    font-size: smaller;
+  }
+
+}
