@@ -164,6 +164,10 @@ body {
   width: 35%;
 }
 
+.SearchButton.superwide {
+  width: 100%;
+}
+
 
 
 .loading-cursor{
