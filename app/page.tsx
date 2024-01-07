@@ -1,7 +1,7 @@
 "use client"
 
 import MapWindow from "./map"
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 
 function App() {
@@ -31,7 +31,7 @@ function App() {
     return (
         <main className="main">
             <div className="headingWrapper" id="headingWrapper">
-              <h1 id="heading">Wifi Locator</h1>
+              <h1 id="heading">NYC Wifi Locator</h1>
             </div>
             <div className="filters">
               <div className="filterChild">
