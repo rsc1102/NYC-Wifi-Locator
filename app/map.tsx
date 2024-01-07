@@ -3,6 +3,7 @@
 import { useEffect, useState , useMemo} from 'react';
 import { GoogleMap, useLoadScript, MarkerF ,InfoWindowF} from "@react-google-maps/api";
 import Filter from "components/filter";
+import UserInNYC from '@/components/userInNYC';
 
 type MapWindowType = {
   range:number,
@@ -35,6 +36,16 @@ export default function MapWindow({range,wifiType}:MapWindowType) {
       <button className="SearchButton loading-cursor wide" disabled>Searching...</button>
       <span className='permissionInfo'>(Turn on Location Permission if not enabled)</span>
     </div>);
+  }
+
+  console.log(UserInNYC(userLocation));
+
+  if (!UserInNYC(userLocation)){
+    return (
+      <div className='flex flex-col items-center '>
+        <button className="SearchButton lightblue superwide" disabled>Search Failed</button>
+        <span className='permissionInfo'>(User location not in NYC)</span>
+      </div>);
   }
 
   return (
@@ -82,16 +93,6 @@ function Map({userLocation,range,wifiType}:MapType) {
       return;
     }
     setActiveMarker(marker);
-    // const bounds = new google.maps.LatLngBounds();
-    // bounds.extend(center)
-    // data.every(( item ) => {
-    //   if(item.key === marker){
-    //     bounds.extend({lat:item.lat, lng:item.lng});
-    //     return false;
-    //   }
-    //   return true;
-    // });
-    // map.fitBounds(bounds);
   };
 
   const blueDot = {
