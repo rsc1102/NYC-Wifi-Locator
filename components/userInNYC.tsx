@@ -28,22 +28,12 @@ type location = {
     lng : number
 };
 
-type datapoint = {
-    "key": number,
-    "lat": number,
-    "lng": number,
-    "Type": string,
-    "Remarks": string|null,
-    "Name": string|null
-}
-
 export default function UserInNYC(user_location:location){
     const data = GetData();
-
-    data.map((item:datapoint) => {
+    for(const item of data){
         if(distance_in_miles(user_location.lat,user_location.lng,item.lat,item.lng) <= 2){
             return true;
         }
-    })
+    }
     return false;
 }

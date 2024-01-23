@@ -38,8 +38,6 @@ export default function MapWindow({range,wifiType}:MapWindowType) {
     </div>);
   }
 
-  console.log(UserInNYC(userLocation));
-
   if (!UserInNYC(userLocation)){
     return (
       <div className='flex flex-col items-center '>
