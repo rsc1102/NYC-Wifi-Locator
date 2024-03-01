@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState , useMemo} from 'react';
-import { GoogleMap, useLoadScript, MarkerF ,InfoWindowF} from "@react-google-maps/api";
+import { GoogleMap, useJsApiLoader, MarkerF ,InfoWindowF} from "@react-google-maps/api";
 import Filter from "components/filter";
 import UserInNYC from '@/components/userInNYC';
 
@@ -11,7 +11,7 @@ type MapWindowType = {
 }
 
 export default function MapWindow({range,wifiType}:MapWindowType) {
-  const { isLoaded } = useLoadScript({
+  const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY as string,
   });
 
