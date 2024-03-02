@@ -109,7 +109,8 @@ function Map({userLocation,range,wifiType}:MapType) {
       zoom={15} 
       onLoad={handleOnLoad}
       center={center} 
-      mapContainerClassName="map-container">
+      mapContainerClassName="map-container"
+      id="google-map">
 
         <MarkerF position={center}
         icon={blueDot}
@@ -130,6 +131,8 @@ function Map({userLocation,range,wifiType}:MapType) {
 
               </InfoWindowF>
             ) : null}
+
+        
         </MarkerF>
       ))}
     </GoogleMap>
